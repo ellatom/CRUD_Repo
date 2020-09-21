@@ -48,18 +48,9 @@ class Form extends React.Component {
         }
     }
 
-    handleUpdate=async()=>
-    {
-        let avatar= { "id": this.state.key,
-                     "createdAt": new Date().toLocaleDateString(),
-                    "name": this.state.nameInput,
-                    "avatar": this.state.urlInput
-                    };
-        await api.createAvatar(avatar);
-        window.location.reload(false);
-        
-  
-    }
+    handleUpdate = async () => {
+        await this.props.onUpdate(this.state.key,this.state.nameInput,this.state.urlInput);
+      }
 
     validate = () => {
         let error = "";
@@ -75,7 +66,6 @@ class Form extends React.Component {
 
         else if (!this.state.urlInput.match(/\.(jpg|jpeg|png|gif)$/))
             error += 'Please select valid image.';
-////bug insert same image or no message appear
         else if (this.state.allavatars.find(element => element.name=== this.state.nameInput) || 
                  this.state.allavatars.find(avatar=>avatar.avatar === this.state.urlInput))
                 error += 'This avatar alreay exists by name or url'
@@ -86,12 +76,26 @@ class Form extends React.Component {
     render() {
         return (
             <>
-                <form onSubmit={this.handleSubmit} style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', padding: '9px', backgroundColor: 'grey' }}>
+                <form className="form" onSubmit={this.handleSubmit} >
                     <h2>Create Avatar</h2>
-                    <input name="nameInput" value={this.state.nameInput} onChange={this.handleChange} type='text' placeholder="Insert avatar name"></input>
-                    <input name="urlInput" value={this.state.urlInput} onChange={this.handleChange} type='text' placeholder="Insert avatar url image" ></input>
+                    <input 
+                        id={this.props.avatarKey} 
+                        name="nameInput" 
+                        value={this.state.nameInput} 
+                        onChange={this.handleChange} 
+                        type='text' 
+                        placeholder="Insert avatar name">
+                    </input>
+                    <input 
+                        id={this.props.avatarKey} 
+                        name="urlInput" 
+                        value={this.state.urlInput} 
+                        onChange={this.handleChange} 
+                        type='text' 
+                        placeholder="Insert avatar url image" >
+                    </input>
                     <input type="submit" value="Submit" />
-                    <div style={{color:'red'}}>{this.state.errors}</div>
+                    <div className="errMsg">{this.state.errors}</div>
                 </form>
             </>
         );

@@ -3,17 +3,15 @@ import Modal from "./Modal";
 import api from './api';
 
 class EditAvatar extends React.Component {
-  constructor(props) {
-    super(props);
 
-    this.state = {
-      modal: false,
-      name: "",
+
+    state = {
       modalInputName: "",
       modalInputUrl: "",
-      loading: false
+      loading: false,
+      modal: false
     };
-  }
+  
 
   async handleChange(e) {
     const target = e.target;
@@ -28,7 +26,6 @@ class EditAvatar extends React.Component {
 
   async handleSubmit(e) {
     this.setState({ name: this.state.modalInputName });
-    this.modalClose();
     let avatar = {
       "id": this.props.keyAvatar,
       "createdAt": new Date().toLocaleDateString(),
@@ -50,46 +47,36 @@ class EditAvatar extends React.Component {
     this.setState({ modal: true });
   }
 
-  modalClose() {
-    this.setState({
-      modalInputName: "",
-      modal: false
-    });
-  }
 
   render() {
     return (
       <div>
-        <a href="javascript:;" onClick={e => this.modalOpen(e)}>
+        <div onClick={e => this.modalOpen(e)}>
           Update Avatar
-          </a>
-        <Modal show={this.state.modal} handleClose={e => this.modalClose(e)}>
+          </div>
+        <Modal show={this.state.modal}>
           <div className="form-group">
-            <label for="name">Avatar Name:</label>
+            <label htmlFor="modalInputName">Avatar Name:</label>
             <input
-              id="name"
+              id={this.props.avatarKey}
               type="text"
               value={this.state.modalInputName}
               name="modalInputName"
               onChange={e => this.handleChange(e)}
-              className="form-control"
-            />
+              className="form-control"/>
             <br />
-            <label for="url">Image url:</label>
+            <label htmlFor="modalInputUrl">Image url:</label>
             <input
-              id="url"
+              id={this.props.avatarKey}
               type="text"
               value={this.state.modalInputUrl}
               name="modalInputUrl"
               onChange={e => this.handleChange(e)}
-              className="form-control"
-            />
+              className="form-control"/>
           </div>
-          <div className="form-group">
-            <button onClick={e => this.handleSubmit(e)} type="button">
-              Save
-              </button>
-          </div>
+          <button onClick={e => this.handleSubmit(e)}>
+            Save
+          </button>
         </Modal>
       </div>
     );

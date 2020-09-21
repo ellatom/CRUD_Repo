@@ -3,13 +3,16 @@ import api from './api';
 import AvatarList from './AvatarList';
 import LoadingSpinner from './LoadingSpinner';
 import Form from './Form'
+import './main.css';
 
 class App extends React.Component {
 
-    state = { allavatars: [], loading: false };
+    state = { allavatars: [], loading: true };
 
     async componentDidMount() {
+        this.setState({isLoading: false});
         await this.refreshDisplay();
+        console.log("Log: ComponentDidMount");
     };
 
     refreshDisplay = async () => {
@@ -21,19 +24,43 @@ class App extends React.Component {
                 loading: false
             });
         });
+    }
+    deleteAvatar = async (event, keyAvatar) => {
 
-
+        this.setState({ loading: true }, async () => {
+            await api.deleteAvatar(keyAvatar);
+            this.setState({
+                loading: false
+            });
+            await this.refreshDisplay();
+        });
     }
 
-    //first render is empty insert [] or condition spinner instead of Please wait....render happens
+    updateAvatar = async (key, nameInput, urlInput) => {
+        let avatar = {
+            "id": key,
+            "createdAt": new Date().toLocaleDateString(),
+            "name": nameInput,
+            "avatar": urlInput
+        };
+        await api.createAvatar(avatar);
+        await this.refreshDisplay();
+    }
+
+    //first render is empty insert [] 
     render() {
         return (
             <>
-                <Form ></Form>
+            {this.state.loading ? <LoadingSpinner /> :
                 <div>
-                    {this.state.allavatars !== null && this.state.loading
-                        ? <LoadingSpinner /> : <AvatarList avatars={this.state.allavatars}></AvatarList>}
-                </div>
+                <Form avatars={this.state.allavatars}
+                    onUpdate={this.updateAvatar} >
+                </Form>
+                 <AvatarList
+                    avatars={this.state.allavatars}
+                    onDelete={this.deleteAvatar}>
+                </AvatarList>
+                </div>}
             </>
         );
     }

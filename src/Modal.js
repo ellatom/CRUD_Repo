@@ -1,4 +1,8 @@
 import React from "react";
+<<<<<<< HEAD
+=======
+import './main.css'
+>>>>>>> second push re-arranged the code
 
 const Modal = ({ handleClose, show, children }) => {
   const showHideClassName = show ? "modal d-block" : "modal d-none";

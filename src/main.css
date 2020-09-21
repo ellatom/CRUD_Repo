@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .container {
     min-height: 100vh;
     display: flex;
@@ -24,3 +25,68 @@
     }
   }
   
+=======
+.avatarList{
+  display:flex;
+  flex-direction:row;
+  flex-wrap:wrap;
+  margin:5px;
+  background-color:black;
+}
+.avatarCard
+{
+ background-color: green;
+ margin: 7px;
+ border-radius: 4px;
+ padding: 5px 0px;
+ color: white;
+ border: 1px solid white
+}
+.avatarCard img{
+  
+    width: 128px; 
+    height: 128px;
+    margin: 0px auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.avatarName{
+  border-radius: 4px;
+  text-align: center; 
+}
+.avatarUrl{
+  font-size: 5px;
+  max-width: 100px;
+  margin: 0 auto;
+  word-wrap: break-word;
+
+}
+.editAvatar{
+  background-color: grey;
+  margin: 7px;
+  border-radius: 4px;
+  padding: 5px 0px;
+}
+.avatarId
+{
+  text-align: center
+}
+.btnAvatarCard
+{
+  text-align: center;
+  max-width:  128px;
+  overflow: hidden;
+}
+.form{
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   padding: 9px;
+   background-color: grey;
+}
+.errMsg{
+  color:'red'
+}
+>>>>>>> second push re-arranged the code

@@ -4,16 +4,19 @@ import './main.css';
 
 class AvatarList extends React.Component {
 
-    avatarsList = this.props.avatars.map((avatar, index) => //ask why i need avatar.id and keyAvatar
+    avatarsList = this.props.avatars.map((avatar, index) =>{ //ask why i need avatar.id and keyAvatar
+        console.log("aaaaaaaaaaaaaaa");
+        return (
         <AvatarCard
-            key={avatar.id}
-            keyAvatar={avatar.id}
-            name={avatar.name}
-            url={avatar.avatar}
+            avatar={avatar}
             onDelete={this.props.onDelete}>
-        </AvatarCard>);
+        </AvatarCard>
+    
+        )
+    });
 
     render() {
+        console.log("I was in avatar list")
         return (
             <>
                 <div className="avatarList" >{this.avatarsList}</div>

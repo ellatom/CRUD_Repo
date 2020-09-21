@@ -9,7 +9,7 @@ class AvatarCard extends React.Component {
     loading: false // will be true when ajax request is running
   }
 
-  deleteAvatar = async (event, props) => {
+  deleteAvatar = async (event) => {
     this.props.onDelete(event, this.props.keyAvatar);
   }
 

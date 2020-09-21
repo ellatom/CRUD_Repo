@@ -71,7 +71,7 @@ class EditAvatar extends React.Component {
               type="text"
               value={this.state.modalInputUrl}
               name="modalInputUrl"
-              onChange={e => this.handleChange(e)}
+              onChange={e => this.handleChange(e)}//not to lose context 'this' arrow function used
               className="form-control"/>
           </div>
           <button onClick={e => this.handleSubmit(e)}>

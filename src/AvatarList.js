@@ -8,7 +8,14 @@ class AvatarList extends React.Component {
         console.log("aaaaaaaaaaaaaaa");
         return (
         <AvatarCard
+<<<<<<< Updated upstream
             avatar={avatar}
+=======
+            key={avatar.id}
+            keyAvatar={avatar.id}
+            name={avatar.name}
+            url={avatar.avatar} 
+>>>>>>> Stashed changes
             onDelete={this.props.onDelete}>
         </AvatarCard>
     
